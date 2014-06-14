@@ -50,7 +50,12 @@ class Roman_numerals_kata_specs(unittest.TestCase):
 class RomanNumeralConverter:
 
 	def convert(self, number):
-		return "ABC"
+		if (number == 9): return "IX"
+		elif (number < 5): return self.__digitsFor(number)
+		else: return "V" + self.__digitsFor(number)
+
+	def __digitsFor(self, number): return "I" * number
+
 
 unittest.main()
 
