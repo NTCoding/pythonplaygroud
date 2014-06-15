@@ -52,7 +52,7 @@ class Roman_numerals_kata_specs(unittest.TestCase):
 class RomanNumeralConverter:
 
 	def convert(self, number):
-		thousands = (int(number / 1000))
+		thousandsX = (int(number / 1000))
 		hundredsX = int((number - (thousandsX * 1000)) / 100)
 		tensX = int((number - (hundredsX * 100) - (thousandsX * 1000)) / 10)
 		unitsX = (number -(thousandsX * 1000) - (hundredsX * 100) - (tensX * 10))
