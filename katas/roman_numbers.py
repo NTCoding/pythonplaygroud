@@ -28,7 +28,7 @@ class Roman_numerals_kata_specs(unittest.TestCase):
 		converter = RomanNumeralConverter()
 		converted = converter.convert(number)
 		self.assertEqual(converted, numeral)
-'''
+
 	@data((1000, "M"), (3000, "MMM"), (4001, "MMMMI"), (5126, "MMMMMCXXVI"), 
 		  (9067, "MMMMMMMMMLXVII"), (9998, "MMMMMMMMMCMXCVIII"), 
 		  (7553, "MMMMMMMDLIII"), (6244, "MMMMMMCCXLIV"))
@@ -38,6 +38,7 @@ class Roman_numerals_kata_specs(unittest.TestCase):
 		converted = converter.convert(number)
 		self.assertEqual(converted, numeral)
 
+'''
 	@data((10000, "MMMMMMMMMM"), 
 		  (500001, "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMI"), 
 		  (235123, "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMCXXIII"))
@@ -51,14 +52,17 @@ class Roman_numerals_kata_specs(unittest.TestCase):
 class RomanNumeralConverter:
 
 	def convert(self, number):
-		# input magnitude will soon come into play
-		hundredsX = int(number / 100)
-		tensX = int((number - (hundredsX * 100)) / 10)
-		unitsX = (number - (hundredsX * 100) - (tensX * 10))
+		thousands = (int(number / 1000))
+		hundredsX = int((number - (thousandsX * 1000)) / 100)
+		tensX = int((number - (hundredsX * 100) - (thousandsX * 1000)) / 10)
+		unitsX = (number -(thousandsX * 1000) - (hundredsX * 100) - (tensX * 10))
+		thousands = self.__thousandsFor(thousandsX)
 		hundreds = self.__hundredsFor(hundredsX) 
 		tens = self.__tensFor(tensX) 
 		units = self.__unitsFor(unitsX)
-		return hundreds + tens + units
+		return thousands + hundreds + tens + units
+
+	def __thousandsFor(self, number): return "M" * number
 
 	def __hundredsFor(self, number):
 		if (number == 9): return "CM"
