@@ -15,7 +15,7 @@ class Is_fibo_checker_specs(unittest.TestCase):
 	def test_correctly_identifies_non_fibonacci_numbers(self, non_fibonacci_number):
 		checker = IsFiboChecker()
 		result = checker.is_fibo(non_fibonacci_number)
-		self.assertEqual(result, "IsNonFibo")
+		self.assertEqual(result, "IsNotFibo")
 
 # end of tests
 
@@ -34,7 +34,7 @@ class IsFiboChecker:
 		if number in last_fibs: 
 			return "IsFibo"
 		elif number < last_fibs[1]:
-			return "IsNonFibo"
+			return "IsNotFibo"
 		else:
 			next_fib = sum(last_fibs)
 			new_fibs = [last_fibs[1], next_fib]
