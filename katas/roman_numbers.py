@@ -53,14 +53,21 @@ class RomanNumeralConverter:
 
 	def convert(self, number):
 		thousandsX = (int(number / 1000))
-		hundredsX = int((number - (thousandsX * 1000)) / 100)
-		tensX = int((number - (hundredsX * 100) - (thousandsX * 1000)) / 10)
-		unitsX = (number -(thousandsX * 1000) - (hundredsX * 100) - (tensX * 10))
+		hundredsX = self.__parseDigit(-3, number)
+		tensX = self.__parseDigit(-2, number)
+		unitsX = self.__parseDigit(-1, number)
 		thousands = self.__thousandsFor(thousandsX)
 		hundreds = self.__hundredsFor(hundredsX) 
 		tens = self.__tensFor(tensX) 
 		units = self.__unitsFor(unitsX)
 		return thousands + hundreds + tens + units
+
+	def __parseDigit(self, digit, number):
+		try:
+			st = str(number)
+			return int(st[digit])
+		except IndexError:
+			return 0
 
 	def __thousandsFor(self, number): return "M" * number
 
