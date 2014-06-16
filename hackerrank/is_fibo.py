@@ -17,6 +17,11 @@ class Is_fibo_checker_specs(unittest.TestCase):
 		result = checker.is_fibo(non_fibonacci_number)
 		self.assertEqual(result, "IsNonFibo")
 
+# end of tests
+
+# solution - submit this
+import sys
+
 class IsFiboChecker:
 
 	def is_fibo(self, number):
@@ -36,4 +41,8 @@ class IsFiboChecker:
 			return self.__is_fibo(number, new_fibs)
 
 
-unittest.main()
+#unittest.main()
+lines = sys.stdin.readlines()[1:]
+nums = [ int(l) for l in lines ]
+checker = IsFiboChecker()
+[ print(checker.is_fibo(n)) for n in  nums ]
