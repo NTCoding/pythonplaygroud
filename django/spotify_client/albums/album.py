@@ -15,6 +15,6 @@ def __toAlbum(album):
 		"album" : {
 		    "name": album['name'],
             "image": album['images'][0],
-            "link": album['uri']
+            "link": "https://open.spotify.com/artist/" + album['id']
 		}
 	}
