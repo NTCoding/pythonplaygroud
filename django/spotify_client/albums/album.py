@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 
 
-def album(request):
-    return HttpResponse("Albums")
+def search(request):
+    query = request.GET.get("query")
+    return HttpResponse("Album search for: %s" % query)
