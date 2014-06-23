@@ -47,6 +47,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_DIRS = (
+    'website'
+)
+
 ROOT_URLCONF = 'spotify_client.urls'
 
 WSGI_APPLICATION = 'spotify_client.wsgi.application'
