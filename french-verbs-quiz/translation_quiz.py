@@ -7,18 +7,21 @@ def main():
     while True:
         verb = random.choice(verbs) 
         quiz_user(verb)
-        print("Moving on......")
+        print("Question suivante....")
         print("\n\n")
         time.sleep(3)
 
 def quiz_user(verb):
-    print("What does " + verb[0] + " mean?")
-    answer = raw_input()
-    print("You said: " + answer + ". The correct answer is " + verb[1])
+    print("Quel est le sens de " + verb[0] + "?")
+    answer = input()
+    print("Tu as dit: " + answer + ".")
+    time.sleep(2)
+    print("La bonne réponse est " + verb[1])
+    time.sleep(1)
     if answer.strip() == verb[1].strip():
-        print("You are correct!")
+        print("Vous avez raison!")
     else:
-        print("Sorry. You were wrong. You need to practice " + verb[0])
+        print("Désolé. Votre response est incorrecte. Vous devez pratiquer " + verb[0])
     time.sleep(2)
     print("")
 
