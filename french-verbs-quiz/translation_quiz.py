@@ -3,19 +3,18 @@ import time
 
 def main():
     verbs_file = "translations.tsv"
+    number_of_questions = 5
     verbs = parse_verbs(verbs_file)
-    incorrect_answers = []
-    for x in range(0, 20):
+    results = []
+    for x in range(1, number_of_questions + 1):
+        print("Question " + str(x) + " of " + str(number_of_questions) + "....")
+        print()
         verb = random.choice(verbs) 
-        failure = quiz_user(verb)
-        if (failure):
-            incorrect_answers.append(failure)
-        time.sleep(1)    
+        result = quiz_user(verb)
+        results.append(result)
         print("")
-        print("Question suivante....")
-        print("")
-        time.sleep(3)
-    print_failures(incorrect_answers)
+        time.sleep(2)
+    print_results(results)
 
 def quiz_user(verb):
     print("Quel est le sens de " + verb[0] + "?")
@@ -26,9 +25,10 @@ def quiz_user(verb):
     time.sleep(1)
     if answer.strip() == verb[1].strip():
         print("Vous avez raison!")
+        return("correct", verb[0], answer, verb[1])
     else:
         print("Désolé. Votre response est incorrecte.")
-        return (verb[0], answer)
+        return("incorrect", verb[0], answer, verb[1])
 
 def parse_verbs(file):
     verbs = []
@@ -37,11 +37,18 @@ def parse_verbs(file):
         verbs.append((parts[0].strip(), parts[1].strip()))
     return verbs
 
-def print_failures(failures):
-    print()
-    print("You answered incorrectly to...")
-    print()
-    for f in failures:
-        print(f[0] + " - you said: " + f[1])
+def print_results(results):
+    print("Incorrect answers.....")
+    print("")
+    for r in results:
+        if r[0] == "incorrect":
+            print(r[1] + " - you said: " + r[2] + ". Correct answer: " + r[3])
+    print("")
+    print("Corect answers.....")
+    print("")
+    for r in results:
+        if r[0] == "correct":
+            print(r[1])
+
 
 main()
